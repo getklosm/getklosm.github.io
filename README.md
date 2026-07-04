@@ -14,10 +14,10 @@ make sure it is on the right version by running 'python3 --version', it should r
 next run this command 'python3 -m pip install cryptography pygments flask flask_cors google-genai openai anthropic groq'
 
 ### 4 - kill any process on port 5000
-run these commands based on you operating system
-macos / linux - 'kill -9 $(lsof -f -i:5000)'
+run these commands based on you operating system<br>
+macos / linux - 'kill -9 $(lsof -f -i:5000)'<br>
 windows - open powershell as administrator, and run 'Stop-Process -Id (Get-NetTCPConnection -LocalPort 5000).OwningProcess -Force'
 
 ### 5 - relaunch the app
-just open up the app, it will work ( probably )
+just open up the app, it will work ( probably )<br>
 if it does not work send a email titled 'klosm issue report' to 'accountchair93@proton.me' ( you do not have to use proton to send the email )
