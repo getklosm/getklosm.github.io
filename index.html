@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klosm - Build Beautiful Websites with AI</title>
+    <meta name="description" content="Klosm: The AI-powered desktop application to build beautiful, modern websites with ease. Explore features, downloads, gallery, and roadmap.">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        /* CSS Reset / Normalize */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS Variables (Theme & Branding) */
+        :root {
+            --bg-color: #1a1a1a;
+            --card-bg-color: #282828;
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --accent-color: #007bff;
+            --accent-hover-color: #0056b3;
+            --border-color: #444444;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --gap-spacing: 2rem;
+            --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            --font-heading: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* Header & Navigation */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-color);
+            box-shadow: 0 2px 10px transparent;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .sticky-header.scrolled {
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: var(--gap-spacing);
+            align-items: center;
+        }
+
+        .nav-links a {
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--card-bg-color);
+            color: var(--heading-color);
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--heading-color);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .download-nav-btn {
+            margin-left: var(--gap-spacing);
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .button.primary {
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+        }
+
+        .button.primary:hover {
+            background-color: var(--accent-hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+        }
+
+        .button.secondary {
+            background-color: var(--card-bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .button.secondary:hover {
+            background-color: #3a3a3a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .button.large {
+            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .button [class^="icon-"] {
+            margin-right: 0.5rem;
+            font-size: 1.2em;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px); /* Adjust based on header height */
+            padding: 4rem 1.5rem;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+            line-height: 1.1;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+
+        .hero-visual {
+            margin-top: 4rem;
+            width: 80%;
+            max-width: 900px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transform: translateY(0);
+            transition: transform 0.6s ease-out, box-shadow 0.6s ease-out;
+        }
+
+        .hero-section.is-visible .hero-visual {
+            transform: translateY(0);
+        }
+
+        .hero-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Section */
+        .features-section h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--gap-spacing);
+        }
+
+        .feature-card {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+            flex-grow: 1;
+        }
+
+        /* Downloads Section */
+        .downloads-section h2, .downloads-section p {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section h2, .gallery-section p {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: zoom-in;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            display: block; /* Make the whole area clickable */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--heading-color);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Roadmap Section */
+        .roadmap-section h2, .roadmap-section p {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .roadmap-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--gap-spacing);
+        }
+
+        .roadmap-item {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .roadmap-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .roadmap-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--heading-color);
+        }
+
+        .roadmap-item p {
+            color: var(--text-color);
+            flex-grow: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Animations (Initial State for JS-triggered animations) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-section h1, .hero-section .tagline, .hero-section .button.primary {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .hero-section.is-visible h1 { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        .hero-section.is-visible .tagline { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+        .hero-section.is-visible .button.primary { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+        .hero-section.is-visible .hero-visual { transition-delay: 0.7s; opacity: 1; transform: translateY(0); }
+
+
+        /* Lightbox Styles */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh; /* Ensure image fits viewport */
+            display: block;
+            border-radius: 8px;
+            object-fit: contain; /* Ensure image scales properly without cropping */
+        }
+
+        .lightbox-title {
+            color: var(--heading-color);
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -15px; /* Adjust as needed */
+            right: -15px; /* Adjust as needed */
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            line-height: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .lightbox-close:hover {
+            background-color: var(--accent-hover-color);
+        }
+
+
+        /* Responsive CSS */
+        @media (max-width: 768px) {
+            /* Navigation */
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-color);
+                box-shadow: 0 5px 10px var(--shadow-color);
+                padding: 1rem 0;
+                border-top: 1px solid var(--border-color);
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.8rem 0;
+                border-radius: 0;
+            }
+            .nav-links a:hover {
+                background-color: var(--card-bg-color);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .download-nav-btn {
+                margin-top: 1rem;
+                margin-left: 0;
+            }
+
+            /* Hero Section */
+            .hero-section {
+                padding: 3rem 1.5rem;
+                min-height: auto;
+            }
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-visual {
+                width: 95%;
+                margin-top: 3rem;
+            }
+
+            /* Sections */
+            section {
+                padding: 4rem 0;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            /* Grids */
+            .feature-grid, .gallery-grid, .roadmap-items {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card, .roadmap-item {
+                padding: 1.5rem;
+            }
+
+            .feature-card h3, .roadmap-item h3 {
+                font-size: 1.3rem;
+            }
+
+            /* Download Buttons */
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .button {
+                width: 80%; /* Make buttons wider on mobile */
+                max-width: 300px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 1.5rem 0;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-section h1 {
+                font-size: 3.5rem;
+            }
+            .tagline {
+                font-size: 1.4rem;
+            }
+            .feature-grid, .roadmap-items {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header" class="sticky-header">
+        <nav class="navbar container">
+            <a href="#hero" class="logo">KLOSM</a>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#downloads">Downloads</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#downloads" class="button primary download-nav-btn">Download Klosm</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section container is-visible">
+            <h1>Klosm</h1>
+            <p class="tagline">Turn you Ideas to reality with AI.</p>
+            <a href="#downloads" class="button primary large animate-on-scroll">Download Klosm</a>
+            <div class="hero-visual animate-on-scroll">
+                <img src="coffeeshop.png" alt="Klosm AI website builder desktop application interface" loading="lazy">
+            </div>
+        </section>
+
+        <section id="features" class="features-section container">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card animate-on-scroll">
+                    <h3>🤖 Multiple AI providers</h3>
+                    <p>Seamlessly integrate with leading AI models like Gemini, Claude, GPT, Groq, and more to power your website generation.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <h3>⚡ Live preview</h3>
+                    <p>See your website come to life instantly with a real-time, interactive preview panel as Klosm generates the code.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <h3>📁 Local project generation</h3>
+                    <p>Generate and save entire website projects directly to your local machine, giving you full control over your files.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <h3>🖥️ Desktop application</h3>
+                    <p>Klosm operates as a powerful, dedicated desktop application, ensuring a smooth and focused development environment.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <h3>🔒 Your API keys stay on your machine</h3>
+                    <p>Security first: Your sensitive AI API keys are never sent to external servers, remaining secure on your local device.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="downloads" class="downloads-section container">
+            <h2>Downloads</h2>
+            <p>Get Klosm for your operating system.</p>
+            <div class="download-buttons">
+                <a href="#" class="button secondary icon-apple animate-on-scroll" aria-label="Download Klosm for macOS">🍎 macOS</a>
+                <a href="#" class="button secondary icon-windows animate-on-scroll" aria-label="Download Klosm for Windows">🪟 Windows</a>
+                <a href="#" class="button secondary icon-linux animate-on-scroll" aria-label="Download Klosm for Linux">🐧 Linux (AppImage)</a>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-section container">
+            <h2>Gallery</h2>
+            <p>A few beautiful websites Klosm has generated:</p>
+            <div class="gallery-grid">
+                <a href="digitalartwebsite.png" class="gallery-item animate-on-scroll" data-lightbox="gallery" data-title="Freelance Art Portfolio">
+                    <img src="digitalartwebsite.png" alt="Generated website: Freelance Art Portfolio" loading="lazy">
+                    <div class="overlay">Freelance Art Portfolio</div>
+                </a>
+                <a href="techstartupwebsite.png" class="gallery-item animate-on-scroll" data-lightbox="gallery" data-title="Tech Startup Landing Page">
+                    <img src="techstartupwebsite.png" alt="Generated website: Tech Startup Landing Page" loading="lazy">
+                    <div class="overlay">Tech Startup Landing Page</div>
+                </a>
+                <a href="coffeshopwebsite.png" class="gallery-item animate-on-scroll" data-lightbox="gallery" data-title="Local Business Site">
+                    <img src="coffeshopwebsite.png" alt="Generated website: Local Business Site" loading="lazy">
+                    <div class="overlay">Local Coffee Shop Website</div>
+                </a>
+                <a href="ecomarcestorefrontwebsite.png" class="gallery-item animate-on-scroll" data-lightbox="gallery" data-title="E-commerce Storefront">
+                    <img src="ecomarcestorefrontwebsite.png" alt="Generated website: E-commerce Storefront" loading="lazy">
+                    <div class="overlay">E-commerce Storefront</div>
+                </a>
+            </div>
+            <div class="lightbox-overlay" aria-hidden="true">
+                <div class="lightbox-content">
+                    <button class="lightbox-close" aria-label="Close image lightbox">&times;</button>
+                    <img src="" alt="" loading="lazy">
+                    <div class="lightbox-title"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="roadmap-section container">
+            <h2>Roadmap</h2>
+            <p>What's next for Klosm?</p>
+            <div class="roadmap-items">
+                <div class="roadmap-item animate-on-scroll">
+                    <h3>Local models</h3>
+                    <p>Integrate support for running AI generation models entirely offline, enhancing privacy and speed.</p>
+                </div>
+                <div class="roadmap-item animate-on-scroll">
+                    <h3>Multi-agent pipelines</h3>
+                    <p>Develop advanced pipelines where multiple AI agents collaborate to build more complex and sophisticated websites.</p>
+                </div>
+                <div class="roadmap-item animate-on-scroll">
+                    <h3>Visual workflow builder</h3>
+                    <p>Introduce a drag-and-drop interface to visually design and customize your website generation workflows.</p>
+                </div>
+                <div class="roadmap-item animate-on-scroll">
+                    <h3>More frameworks</h3>
+                    <p>Expand Klosm's capabilities to generate websites using a wider array of modern frontend frameworks.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Klosm. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth Scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // For mobile UX: close nav if open
+                    const navLinks = document.querySelector('.nav-links');
+                    const menuToggle = document.querySelector('.menu-toggle');
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.setAttribute('aria-expanded', false);
+                    }
+                });
+            });
+
+            // Responsive Navigation Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+            });
+
+            // Close menu when a link is clicked (for mobile UX) - already handled in smooth scroll
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.setAttribute('aria-expanded', false);
+                    }
+                });
+            });
+
+            // Dynamic Year in Footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Scroll Animations (Intersection Observer)
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const heroSection = document.getElementById('hero');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            animateElements.forEach(el => observer.observe(el));
+            observer.observe(heroSection); // Observe hero section for its initial animations
+
+
+            // Sticky Header Behavior
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 0) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Gallery Lightbox
+            const lightboxOverlay = document.querySelector('.lightbox-overlay');
+            const lightboxContent = document.querySelector('.lightbox-content');
+            const lightboxImage = lightboxContent.querySelector('img');
+            const lightboxTitle = lightboxContent.querySelector('.lightbox-title');
+            const lightboxCloseBtn = lightboxContent.querySelector('.lightbox-close');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            const openLightbox = (imageSrc, title) => {
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = title;
+                lightboxTitle.textContent = title;
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            };
+
+            const closeLightbox = () => {
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+                lightboxImage.src = ''; // Clear image to save memory
+                lightboxImage.alt = '';
+                lightboxTitle.textContent = '';
+            };
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const imageSrc = item.href;
+                    const title = item.dataset.title || item.querySelector('.overlay').textContent;
+                    openLightbox(imageSrc, title);
+                });
+            });
+
+            lightboxCloseBtn.addEventListener('click', closeLightbox);
+
+            lightboxOverlay.addEventListener('click', (e) => {
+                // Close if clicked outside the image content
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
